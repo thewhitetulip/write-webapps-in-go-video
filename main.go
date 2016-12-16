@@ -36,6 +36,7 @@ func PopulateTemplate() {
 func HomeFunc(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		type Comment struct {
+			ID      string
 			Content string
 			Author  string
 			Created string
@@ -53,18 +54,22 @@ func HomeFunc(w http.ResponseWriter, r *http.Request) {
 			Tasks []Task
 		}
 
-		comment := Comment{Content: "This is a comment!", Author: "@thewhitetulip", Created: "16 Dec 2016"}
+		comment := Comment{ID: "1", Content: "This is a comment!", Author: "@thewhitetulip", Created: "16 Dec 2016"}
+		comment1 := Comment{ID: "2", Content: "This is a comment!", Author: "@thewhitetulip", Created: "16 Dec 2016"}
+
 		var comments []Comment
 		comments = append(comments, comment)
-		comments = append(comments, comment)
+		comments = append(comments, comment1)
 
-		task1 := Task{Title: "Title of First Task", Content: "Content of first task", Created: "16 Dec 2016", Comments: comments}
+		task1 := Task{ID: "1", Title: "Title of First Task", Content: "Content of first task", Created: "16 Dec 2016", Comments: comments}
+		task2 := Task{ID: "2", Title: "Title of second Task", Content: "Content of second task", Created: "16 Dec 2016", Comments: comments}
+		task3 := Task{ID: "3", Title: "Title of third Task", Content: "Content of third task", Created: "16 Dec 2016", Comments: comments}
 
 		var tasks []Task
 
 		tasks = append(tasks, task1)
-		tasks = append(tasks, task1)
-		tasks = append(tasks, task1)
+		tasks = append(tasks, task2)
+		tasks = append(tasks, task3)
 
 		context := Context{Tasks: tasks}
 
