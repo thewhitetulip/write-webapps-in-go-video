@@ -183,20 +183,21 @@
 </div>
 
 <div class="timeline">
-  {{ range  .Tasks }}
+  {{ range  $key, $value := .Tasks }}
     <div class="note" id="1">
-        <p class="noteHeading "> {{ .Title }} 
+        <p class="noteHeading "> {{ $value.Title }} 
         </p> <span class="toggle glyphicon glyphicon-resize-full"></span>
 
         <span class="noteContent">
-            {{ .Content }}
+            {{ $value.Content }}
                  <div class="commentslist">
+		 {{ range $value.Comments }}
                     <div class="comment">
-                        <span>tsample comment</span>
-                        <span class="timestamp">suraj 26 April</span>
+                        <span>{{ .Content  }}</span>
+                        <span class="timestamp">{{ .Author }} {{ .Created }}</span>
                         <a href="/del-comment/1"><span class="glyphicon glyphicon-trash timestamp"></span></a>
                     </div> 
-                   
+                   {{ end }}
                     
                     <div class="comment">
                         <form method="POST" action="/add-comment/">

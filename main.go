@@ -35,17 +35,30 @@ func PopulateTemplate() {
 // HomeFunc handles the / URL and asks the name of the user in German.
 func HomeFunc(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		type Task struct {
-			Title   string
+		type Comment struct {
 			Content string
+			Author  string
 			Created string
+		}
+
+		type Task struct {
+			ID       string
+			Title    string
+			Content  string
+			Created  string
+			Comments []Comment
 		}
 
 		type Context struct {
 			Tasks []Task
 		}
 
-		task1 := Task{Title: "Title of First Task", Content: "Content of first task", Created: "16 Dec 2016"}
+		comment := Comment{Content: "This is a comment!", Author: "@thewhitetulip", Created: "16 Dec 2016"}
+		var comments []Comment
+		comments = append(comments, comment)
+		comments = append(comments, comment)
+
+		task1 := Task{Title: "Title of First Task", Content: "Content of first task", Created: "16 Dec 2016", Comments: comments}
 
 		var tasks []Task
 
