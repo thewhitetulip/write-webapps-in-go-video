@@ -184,11 +184,11 @@
 
 <div class="timeline">
     <div class="note" id="1">
-        <p class="noteHeading "> Title of Task
+        <p class="noteHeading "> {{ .Title }} 
         </p> <span class="toggle glyphicon glyphicon-resize-full"></span>
 
         <span class="noteContent">
-            Content
+            {{ .Content }}
                  <div class="commentslist">
                     <div class="comment">
                         <span>tsample comment</span>
@@ -210,8 +210,8 @@
         <span class="notefooter">
         <ul class="menu">
           <li role="presentation">Priority: 3</li>
-          <!-- <li role="presentation">
-              <span class="glyphicon glyphicon-time"></span> Jan 2016</li> -->
+          <li role="presentation">
+              <span class="glyphicon glyphicon-time"></span> {{ .Created }}</li> 
         <li role="presentation">
             <a role="menuitem" tabindex="-1" href="/trash/1">
                 <span class="glyphicon glyphicon-trash"></span></a>

@@ -12,7 +12,7 @@ var homeTemplate *template.Template
 
 func main() {
 	PopulateTemplate()
-
+	http.Handle("/static/", http.FileServer(http.Dir("public")))
 	http.HandleFunc("/login/", LoginFunc)
 	http.HandleFunc("/", HomeFunc)
 	fmt.Println("Server running on 8081")
@@ -35,7 +35,14 @@ func PopulateTemplate() {
 // HomeFunc handles the / URL and asks the name of the user in German.
 func HomeFunc(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		homeTemplate.Execute(w, nil)
+		type Task struct {
+			Title   string
+			Content string
+			Created string
+		}
+		task1 := Task{Title: "Title of First Task", Content: "Content of first task", Created: "16 Dec 2016"}
+
+		homeTemplate.Execute(w, task1)
 	}
 }
 
