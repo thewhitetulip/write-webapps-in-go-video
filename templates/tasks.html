@@ -1,7 +1,7 @@
 {{ template "_head.html" . }}
 
 <div class="timeline">
-  {{ range  $key, $value := .Tasks }}
+{{ if .Tasks }}  {{ range  $key, $value := .Tasks }}
     <div class="note" id="{{ .ID }}">
         <p class="noteHeading "> {{ $value.Title }} 
         </p> <span class="toggle glyphicon glyphicon-resize-full"></span>
@@ -52,7 +52,8 @@
     </div>
 	{{ end }}
     
-<!-- this should be displayed when the tasks list is empty
+<!-- this should be displayed when the tasks list is empty-->
+{{ else }}
     <div class="note">
         <p class="noteHeading">No Tasks here</p>
         <p class="notefooter">Create new task
@@ -60,7 +61,7 @@
                 here </button>
         </p>
     </div>
--->
+    {{end}}
 </div>
 
 {{ template "_foot.html" . }}
