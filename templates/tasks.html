@@ -183,6 +183,7 @@
 </div>
 
 <div class="timeline">
+  {{ range  .Tasks }}
     <div class="note" id="1">
         <p class="noteHeading "> {{ .Title }} 
         </p> <span class="toggle glyphicon glyphicon-resize-full"></span>
@@ -230,57 +231,8 @@
         </ul>
         </span>
     </div>
+	{{ end }}
     
-    <div class="note" id="1">
-        <p class="noteHeading ">One task
-        </p> <span class="toggle glyphicon glyphicon-resize-full"></span>
-
-        <span class="noteContent">
-            This is a task
-            1 out of 3 is completed
-                 <div class="commentslist">
-                    
-                    <div class="comment">
-                        <span>tsample comment</span>
-                        <span class="timestamp">suraj 26 April</span>
-                        <a href="/del-comment/1"><span class="glyphicon glyphicon-trash timestamp"></span></a>
-                    </div> 
-                   
-                    
-                    <div class="comment">
-                        <form method="POST" action="/add-comment/">
-                        <textarea rows="2" cols="75" name="commentText" placeholder="Add Comment"></textarea>
-                        <input type="text" class="hidden" name="taskID" value="2">
-                        <input type="submit" value="Comment" class="btn btn-primary" />
-                        </form> 
-                    </div>
-                 </div>
-        </span>
-
-        <span class="notefooter">
-        <ul class="menu">
-          <li role="presentation">Priority: 3</li>
-          <!-- <li role="presentation">
-              <span class="glyphicon glyphicon-time"></span> </li> -->
-        <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/trash/1">
-                <span class="glyphicon glyphicon-trash"></span></a>
-        </li>
-        <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/complete/1">
-                <span class="glyphicon glyphicon-check"></span></a>
-        </li>
-        <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/edit/1">
-                <span class="glyphicon glyphicon-pencil"></span></a>
-        </li>
-        <li role="presentation">
-              <a href="/category/dummy"> dummy</a>
-          </li>
-        </ul>
-        </span>
-    </div>
-
 <!-- this should be displayed when the tasks list is empty
     <div class="note">
         <p class="noteHeading">No Tasks here</p>

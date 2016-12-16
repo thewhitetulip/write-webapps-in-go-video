@@ -40,9 +40,22 @@ func HomeFunc(w http.ResponseWriter, r *http.Request) {
 			Content string
 			Created string
 		}
+
+		type Context struct {
+			Tasks []Task
+		}
+
 		task1 := Task{Title: "Title of First Task", Content: "Content of first task", Created: "16 Dec 2016"}
 
-		homeTemplate.Execute(w, task1)
+		var tasks []Task
+
+		tasks = append(tasks, task1)
+		tasks = append(tasks, task1)
+		tasks = append(tasks, task1)
+
+		context := Context{Tasks: tasks}
+
+		homeTemplate.Execute(w, context)
 	}
 }
 
