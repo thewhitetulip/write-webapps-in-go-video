@@ -13,6 +13,17 @@ var templates *template.Template
 var homeTemplate *template.Template
 
 var comments types.Comments
+var category types.Category
+var categories []types.Category
+var tasks types.Tasks
+
+func init() {
+	category = types.Category{Name: "Random", TaskCount: "1"}
+	categories = append(categories, category)
+	category = types.Category{Name: "Very Random", TaskCount: "1"}
+	categories = append(categories, category)
+
+}
 
 // PopulateTemplate reads the ./templates folder and parses all the html files inside it
 // and it stores it in the templates variable which will be lookedup by other variables.
@@ -27,25 +38,43 @@ func PopulateTemplate() {
 	homeTemplate = templates.Lookup("tasks.html")
 }
 
+func AddTaskFunc(w http.ResponseWriter, r *http.Request) {
+	var task types.Task
+
+	if r.Method == "POST" {
+		r.ParseForm()
+
+		csrf := r.FormValue("CSRFToken")
+		if csrf == "supersecret" {
+			task.Title = r.FormValue("title")
+			task.Content = r.FormValue("content")
+			task.Category = r.FormValue("category")
+			task.Priority = r.FormValue("priority")
+			task.Hidden = r.FormValue("hide")
+
+			if task.Hidden == "" {
+				task.Hidden = "off"
+			}
+
+			if task.Hidden == "" || task.Hidden != "on" {
+				tasks = append(tasks, task)
+			}
+
+			task.Created = "17 Dec 2016"
+
+			fmt.Print(tasks)
+
+			http.Redirect(w, r, "/", http.StatusFound)
+		} else {
+			fmt.Println("CSRF Mismatch")
+			http.Redirect(w, r, "/", http.StatusBadRequest)
+		}
+	}
+}
+
 // ShowCompletedTasksFunc populates the /completed URL for the GET request for the currently loggedin user.
 func ShowCompletedTasksFunc(w http.ResponseWriter, r *http.Request) {
-	var tasks types.Tasks
-	comment := types.Comment{ID: "1", Content: "This is a comment!", Author: "@thewhitetulip", Created: "16 Dec 2016"}
-	comment1 := types.Comment{ID: "2", Content: "This is a comment!", Author: "@thewhitetulip", Created: "16 Dec 2016"}
-
-	comments = append(comments, comment)
-	comments = append(comments, comment1)
-
-	task1 := types.Task{ID: "1", Title: "Title of First Task", Content: "Content of first task", Created: "16 Dec 2016", Comments: comments}
-
-	task2 := types.Task{ID: "2", Title: "Title of second Task", Content: "Content of second task", Created: "16 Dec 2016", Comments: comments}
-	task3 := types.Task{ID: "3", Title: "Title of third Task", Content: "Content of third task", Created: "16 Dec 2016", Comments: comments}
-
-	tasks = append(tasks, task1)
-	tasks = append(tasks, task2)
-	tasks = append(tasks, task3)
-
-	context := types.Context{Tasks: tasks}
+	context := types.Context{Tasks: nil}
 
 	homeTemplate.Execute(w, context)
 }
@@ -53,24 +82,7 @@ func ShowCompletedTasksFunc(w http.ResponseWriter, r *http.Request) {
 // HomeFunc handles the / URL and asks the name of the user in German.
 func HomeFunc(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-
-		var tasks types.Tasks
-		comment := types.Comment{ID: "1", Content: "This is a comment!", Author: "@thewhitetulip", Created: "16 Dec 2016"}
-		comment1 := types.Comment{ID: "2", Content: "This is a comment!", Author: "@thewhitetulip", Created: "16 Dec 2016"}
-
-		comments = append(comments, comment)
-		comments = append(comments, comment1)
-
-		task1 := types.Task{ID: "1", Title: "Title of First Task", Content: "Content of first task", Created: "16 Dec 2016", Comments: comments}
-
-		task2 := types.Task{ID: "2", Title: "Title of second Task", Content: "Content of second task", Created: "16 Dec 2016", Comments: comments}
-		task3 := types.Task{ID: "3", Title: "Title of third Task", Content: "Content of third task", Created: "16 Dec 2016", Comments: comments}
-
-		tasks = append(tasks, task1)
-		tasks = append(tasks, task2)
-		tasks = append(tasks, task3)
-
-		context := types.Context{Tasks: tasks}
+		context := types.Context{Tasks: tasks, CSRFToken: "supersecret", Categories: categories}
 
 		homeTemplate.Execute(w, context)
 	}

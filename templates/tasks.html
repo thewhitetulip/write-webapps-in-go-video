@@ -20,7 +20,7 @@
                     <div class="comment">
                         <form method="POST" action="/add-comment/">
                         <textarea rows="2" cols="75" name="commentText" placeholder="Add Comment"></textarea>
-                        <input type="text" class="hidden" name="taskID" value="2">
+                        <input type="text" class="hidden" name="taskID" value="{{ $value.ID }}">
                         <input type="submit" value="Comment" class="btn btn-primary" />
                         </form> 
                     </div>
@@ -29,23 +29,23 @@
 
         <span class="notefooter">
         <ul class="menu">
-          <li role="presentation">Priority: 3</li>
+          <li role="presentation">Priority: {{ $value.Priority }}</li>
           <li role="presentation">
-              <span class="glyphicon glyphicon-time"></span> {{ .Created }}</li> 
+              <span class="glyphicon glyphicon-time"></span> {{ $value.Created }}</li> 
         <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/trash/1">
+            <a role="menuitem" tabindex="-1" href="/trash/{{ $value.ID }}">
                 <span class="glyphicon glyphicon-trash"></span></a>
         </li>
         <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/complete/1">
+            <a role="menuitem" tabindex="-1" href="/complete/{{ $value.ID }}">
                 <span class="glyphicon glyphicon-check"></span></a>
         </li>
         <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="/edit/1">
+            <a role="menuitem" tabindex="-1" href="/edit/{{ $value.ID }}">
                 <span class="glyphicon glyphicon-pencil"></span></a>
         </li>
         <li role="presentation">
-              <a href="/category/dummy"> dummy</a>
+              <a href="/category/{{ $value.Category }}">{{ $value.Category }}</a>
           </li>
         </ul>
         </span>

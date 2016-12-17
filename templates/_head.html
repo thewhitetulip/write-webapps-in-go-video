@@ -112,19 +112,12 @@
                                 </form>
                                 </span>
                             </li>
+			    {{ range .Categories }}
                             <li class="sidebar-item">
-                                <a href="/category/dummy"  class="active">
-                                    <span class="nav-item"> Dummy</span> <span class="badge pull-right">4</span></a>
+                                <a href="/category/{{ .Name }}">
+                                    <span class="nav-item">{{ .Name }}</span> <span class="badge pull-right">{{.TaskCount}}</span></a>
                             </li>
-                            <li class="sidebar-item">
-                                <a href="/category/dummy"  class="active">
-                                    <span class="nav-item"> Dummy</span> <span class="badge pull-right">4</span></a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="/category/dummy"  class="active">
-                                    <span class="nav-item"> Dummy</span> <span class="badge pull-right">4</span></a>
-                            </li>
-                            
+			    {{ end }}
                         </ul>
                     </li>
                 </ul>
@@ -143,11 +136,11 @@
                 <h4 class="modal-title" id="newNoteLabel"><span class="glyphicon glyphicon-pencil"></span>  New Task</h4>
             </div>
             <div class="modal-body">
-                <form enctype="multipart/form-data" action="/add/" method="POST">
+                <form action="/add/" method="POST">
                     <div class="form-group">
 
                         <input type="text" name="title" class="form-control" id="add-note-title" placeholder="Title" />
-                        <input class="hidden" name="CSRFToken" value="" />
+                        <input class="hidden" name="CSRFToken" value="{{ .CSRFToken  }}" />
                     </div>
                     <div class="form-group">
 
@@ -167,15 +160,15 @@
                     Category:
                     <select name="category" class="dropdown">
                         <option>---</option>
-                        <option value="one" selected="true"> </option>
-                        <option value="two" > </option>
-                       
+		    	{{ range .Categories }}
+                        <option value="{{ .Name }}" > {{ .Name }} </option>
+                       {{ end }}
                     </select>
                    
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                <input type="submit" value="Submit" class="btn btn-primary" id="addNoteBtn" />
+                <input type="submit" value="Add Task" class="btn btn-primary" id="addNoteBtn" />
             </div>
             </form>
         </div>
