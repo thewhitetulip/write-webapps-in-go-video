@@ -38,6 +38,7 @@ func PopulateTemplate() {
 	homeTemplate = templates.Lookup("tasks.html")
 }
 
+// AddTaskFunc adds a new task to the array and populates the /add/ URL. Later it is going to insert data in database.
 func AddTaskFunc(w http.ResponseWriter, r *http.Request) {
 	var task types.Task
 
