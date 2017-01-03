@@ -1,5 +1,7 @@
 package types
 
+import "html/template"
+
 type Category struct {
 	Name      string
 	ID        string
@@ -14,14 +16,15 @@ type Comment struct {
 }
 
 type Task struct {
-	ID       string
-	Title    string
-	Content  string
-	Priority string
-	Category string
-	Hidden   string
-	Created  string
-	Comments []Comment
+	ID          string
+	Title       string
+	Content     string
+	HTMLContent template.HTML
+	Priority    string
+	Category    string
+	Hidden      string
+	Created     string
+	Comments    []Comment
 }
 
 type Context struct {
