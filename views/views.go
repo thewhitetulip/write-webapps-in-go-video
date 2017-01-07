@@ -7,13 +7,16 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/thewhitetulip/Tasks-new/db"
+	"github.com/thewhitetulip/Tasks-new/sessions"
 	"github.com/thewhitetulip/Tasks-new/types"
 )
 
 var templates *template.Template
 var homeTemplate *template.Template
+var loginTemplate *template.Template
 
 var tasks types.Tasks
 
@@ -28,6 +31,7 @@ func PopulateTemplate() {
 	}
 
 	homeTemplate = templates.Lookup("tasks.html")
+	loginTemplate = templates.Lookup("login.html")
 }
 
 // AddTaskFunc adds a new task to the array and populates the /add/ URL. Later it is going to insert data in database.
@@ -73,16 +77,15 @@ func ShowCompletedTasksFunc(w http.ResponseWriter, r *http.Request) {
 // HomeFunc handles the / URL and asks the name of the user in German.
 func HomeFunc(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		context, _ := db.GetPendingTasks("suraj")
+		username := sessions.GetCurrentUserName(r)
+		context, _ := db.GetPendingTasks(username)
+		context.CSRFToken = "abcd"
+		expiration := time.Now().Add(365 * 24 * time.Hour)
+		cookie := http.Cookie{Name: "csrftoken", Value: "abcd", Expires: expiration}
+		http.SetCookie(w, &cookie)
 
 		homeTemplate.Execute(w, context)
 	}
-}
-
-// LoginFunc handles the /login URL and shows the profile page of the logged in user on a GET request
-// handles the Login process on the POST request.
-func LoginFunc(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "You are on the profile page!!")
 }
 
 // CompleteTaskFunc handles the /complete/<id> URL and marks the task with ID passed as <id> to status complete
@@ -97,8 +100,7 @@ func CompleteTaskFunc(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	} else {
-		//username := sessions.GetCurrentUserName(r)
-		username := "suraj"
+		username := sessions.GetCurrentUserName(r)
 		err = db.CompleteTask(username, id)
 		if err != nil {
 			message := "Complete task failed"
