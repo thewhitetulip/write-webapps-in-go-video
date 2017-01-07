@@ -3,8 +3,10 @@ package views
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/thewhitetulip/Tasks-new/db"
 	"github.com/thewhitetulip/Tasks-new/types"
@@ -81,4 +83,28 @@ func HomeFunc(w http.ResponseWriter, r *http.Request) {
 // handles the Login process on the POST request.
 func LoginFunc(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "You are on the profile page!!")
+}
+
+// CompleteTaskFunc handles the /complete/<id> URL and marks the task with ID passed as <id> to status complete
+func CompleteTaskFunc(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Redirect(w, r, "/", http.StatusBadRequest)
+		return
+	}
+
+	id, err := strconv.Atoi(r.URL.Path[len("/complete/"):])
+	log.Println(id)
+	if err != nil {
+		log.Println(err)
+	} else {
+		//username := sessions.GetCurrentUserName(r)
+		username := "suraj"
+		err = db.CompleteTask(username, id)
+		if err != nil {
+			message := "Complete task failed"
+			log.Println(message)
+		}
+		http.Redirect(w, r, "/", http.StatusFound)
+	}
+
 }

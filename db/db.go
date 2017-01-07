@@ -80,3 +80,37 @@ func GetCategories(username string) []types.Category {
 	}
 	return categories
 }
+
+//taskQuery encapsulates running multiple queries which don't do much things
+func taskQuery(sql string, args ...interface{}) error {
+	log.Print("inside task query")
+	SQL, err := db.Prepare(sql)
+	if err != nil {
+		log.Println("error in preparing query")
+		return err
+	}
+	tx, err := db.Begin()
+	if err != nil {
+		log.Println("error starting transaction")
+		return err
+	}
+	_, err = tx.Stmt(SQL).Exec(args...)
+	if err != nil {
+		log.Println("taskQuery: ", err)
+		tx.Rollback()
+	} else {
+		err = tx.Commit()
+		if err != nil {
+			log.Println(err)
+			return err
+		}
+		log.Println("Commit successful")
+	}
+	return err
+}
+
+//CompleteTask  is used to mark tasks as complete
+func CompleteTask(username string, id int) error {
+	err := taskQuery("update task set task_status_id=?, finish_date=datetime(),last_modified_at=datetime() where id=? and user_id=(select id from user where username=?) ", taskStatus["COMPLETE"], id, username)
+	return err
+}

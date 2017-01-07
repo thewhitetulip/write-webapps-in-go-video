@@ -12,6 +12,7 @@ func main() {
 
 	http.Handle("/static/", http.FileServer(http.Dir("public")))
 	http.HandleFunc("/completed/", views.ShowCompletedTasksFunc)
+	http.HandleFunc("/complete/", views.CompleteTaskFunc)
 	http.HandleFunc("/add/", views.AddTaskFunc)
 	http.HandleFunc("/login/", views.LoginFunc)
 	http.HandleFunc("/", views.HomeFunc)
