@@ -71,7 +71,7 @@ func ShowCompletedTasksFunc(w http.ResponseWriter, r *http.Request) {
 // HomeFunc handles the / URL and asks the name of the user in German.
 func HomeFunc(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		context := db.GetPendingTasks("suraj")
+		context, _ := db.GetPendingTasks("suraj")
 
 		homeTemplate.Execute(w, context)
 	}
