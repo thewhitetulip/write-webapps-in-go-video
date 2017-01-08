@@ -6,6 +6,10 @@ There are 17 videos and a branch related to each video.
 
 Starting from Video3, you'll find actual code related content, check the video3 branch to get the final code of that video, and video<n> for the code corresponding to the n'th video.
 
+If you want to download the completed app: https://github.com/thewhitetulip/Tasks.
+
+This series is based on the tutorial https://github.com/thewhitetulip/web-dev-golang-anti-textbook/, you can download it from https://leanpub.com/antitextbookGo/.
+
 | Branch | Video |
 | ---- | ---- |
 |[Basic Version](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/Basicversion) | Starting point of this project. This is what you should clone initially into your machine if you want to follow along the series.
@@ -22,5 +26,5 @@ Starting from Video3, you'll find actual code related content, check the video3 
 |[Video13](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video13)|[13. Getting started with using database with Go](https://www.youtube.com/watch?v=A-3MnkvKPlI)|
 |[Video14](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video14)|[14. Connecting to sqlite3 ](https://www.youtube.com/watch?v=N88u0uXTkLM)|
 |[Video15](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video15)|[15. Updating a value in the database ](https://www.youtube.com/watch?v=946-wzaSdXE)|
-|[Video16](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video16)|[https://www.youtube.com/watch?v=WjrJmtcZeOM](https://www.youtube.com/watch?v=WjrJmtcZeOM)|
+|[Video16](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video16)|[16. User authentication](https://www.youtube.com/watch?v=WjrJmtcZeOM)|
 |[Video17](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video17)|[17. Inserting data into database](https://www.youtube.com/watch?v=AC8KjKcoup0)|
