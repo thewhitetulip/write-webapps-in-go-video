@@ -18,9 +18,9 @@ Starting from Video3, you'll find actual code related content, check the video3 
 |[Video9](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video9)|[9. Populating completed tasks](https://youtu.be/24b0jrHfhqU)|
 |[Video10](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video10)|[10. Understanding packages](https://youtu.be/sqM04eeU-q8)|
 |[Video11](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video11)|[11. Form handling in Go](https://youtu.be/tLfMmjGPRls)|
-|[Video12](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video12)|[]()|
-|[Video13](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video13)|[]()|
-|[Video14](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video14)|[]()|
-|[Video15](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video15)|[]()|
-|[Video16](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video16)|[]()|
-|[Video17](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video17)|[]()|
+|[Video12](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video12)|[12. Rendering markdown](https://www.youtube.com/watch?v=2mYiEdqyxLo)|
+|[Video13](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video13)|[13. Getting started with using database with Go](https://www.youtube.com/watch?v=A-3MnkvKPlI)|
+|[Video14](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video14)|[14. Connecting to sqlite3 ](https://www.youtube.com/watch?v=N88u0uXTkLM)|
+|[Video15](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video15)|[15. Updating a value in the database ](https://www.youtube.com/watch?v=946-wzaSdXE)|
+|[Video16](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video16)|[https://www.youtube.com/watch?v=WjrJmtcZeOM](https://www.youtube.com/watch?v=WjrJmtcZeOM)|
+|[Video17](https://github.com/thewhitetulip/write-webapps-in-go-video/tree/video17)|[17. Inserting data into database](https://www.youtube.com/watch?v=AC8KjKcoup0)|
