@@ -42,22 +42,18 @@ func AddTaskFunc(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 
 		csrf := r.FormValue("CSRFToken")
-		if csrf == "supersecret" {
+		if csrf == "abcd" {
 			task.Title = r.FormValue("title")
 			task.Content = r.FormValue("content")
 			task.Category = r.FormValue("category")
 			task.Priority = r.FormValue("priority")
 			task.Hidden = r.FormValue("hide")
 
-			if task.Hidden == "" {
-				task.Hidden = "off"
+			username := sessions.GetCurrentUserName(r)
+			err := db.AddTask(username, task)
+			if err != nil {
+				log.Println("error adding task to db")
 			}
-
-			if task.Hidden == "" || task.Hidden != "on" {
-				tasks = append(tasks, task)
-			}
-
-			task.Created = "17 Dec 2016"
 
 			http.Redirect(w, r, "/", http.StatusFound)
 		} else {

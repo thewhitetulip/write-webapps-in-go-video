@@ -114,3 +114,19 @@ func CompleteTask(username string, id int) error {
 	err := taskQuery("update task set task_status_id=?, finish_date=datetime(),last_modified_at=datetime() where id=? and user_id=(select id from user where username=?) ", taskStatus["COMPLETE"], id, username)
 	return err
 }
+
+// AddTask adds a task to the database of the currently logged in user
+//AddTask is used to add the task in the database
+//TODO: add dueDate feature later
+func AddTask(username string, task types.Task) error {
+	log.Println("AddTask: started function")
+	var err error
+
+	userID, err := GetUserID(username)
+	if err != nil && (task.Title != "" || task.Content != "") {
+		return err
+	}
+
+	err = taskQuery("insert into task(title, content, priority, task_status_id, created_date, last_modified_at, user_id,hide) values(?,?,?,?,datetime(), datetime(),?,?)", task.Title, task.Content, task.Priority, taskStatus["PENDING"], userID, task.Hidden)
+	return err
+}
